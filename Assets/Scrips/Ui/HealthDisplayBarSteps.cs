@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class HealthDisplayBarSteps : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private HealthCounter _playerHealth;
 
     private Slider _healthSlider;
 

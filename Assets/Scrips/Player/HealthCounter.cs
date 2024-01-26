@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHealth : MonoBehaviour
+public class HealthCounter : MonoBehaviour
 {
     [SerializeField] private float _health = 10;
     [SerializeField] private float _minHealth;

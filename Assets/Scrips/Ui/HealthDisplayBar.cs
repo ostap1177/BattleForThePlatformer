@@ -7,7 +7,7 @@ public class HealthDisplayBar : MonoBehaviour
 {
     [SerializeField] private float _stepHealth;
     [SerializeField] private float _delay;
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private HealthCounter _playerHealth;
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _launchedControlHealthBar;

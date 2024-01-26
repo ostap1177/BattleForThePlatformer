@@ -8,7 +8,7 @@ using System;
 [RequireComponent(typeof(TMP_Text))]
 public class HealthDisplayText : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private HealthCounter _playerHealth;
     [SerializeField] private string _nameText;
 
     private TMP_Text _text;
