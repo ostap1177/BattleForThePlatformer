@@ -5,7 +5,6 @@ public class HealthDisplayBar : Bar
 {
     [SerializeField] private float _stepHealth;
     [SerializeField] private float _delay;
-    [SerializeField] private HealthCounter _playerHealth;
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _launchedControlHealthBar;
@@ -15,17 +14,7 @@ public class HealthDisplayBar : Bar
         _healthSlider.value = 1;
     }
 
-    private void OnEnable()
-    {
-        _playerHealth.Changed += OnChange;
-    }
-
-    private void OnDisable()
-    {
-        _playerHealth.Changed -= OnChange;
-    }
-
-    private void OnChange(float health,float maxHealth)
+    protected override void OnChanged(float health,float maxHealth)
     {
         float targetValue = GetNormalizeValue(health, maxHealth);
 
