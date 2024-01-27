@@ -26,6 +26,6 @@ public class HealthDisplayText : MonoBehaviour
 
     private void OnChange(float health, float maxHealth)
     {
-       _text.text = $"{_nameText}: {health}"; 
+       _text.text = $"{_nameText}: {health}/{maxHealth}"; 
     }
 }
