@@ -1,9 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
-public class HealthDisplayBar : MonoBehaviour
+public class HealthDisplayBar : Bar
 {
     [SerializeField] private float _stepHealth;
     [SerializeField] private float _delay;
@@ -11,11 +9,9 @@ public class HealthDisplayBar : MonoBehaviour
 
     private WaitForSeconds _waitForSeconds;
     private Coroutine _launchedControlHealthBar;
-    private Slider _healthSlider;
 
     private void Awake()
     {
-        _healthSlider = GetComponent<Slider>();
         _healthSlider.value = 1;
     }
 
@@ -31,7 +27,7 @@ public class HealthDisplayBar : MonoBehaviour
 
     private void OnChange(float health,float maxHealth)
     {
-        float targetValue = health/maxHealth;
+        float targetValue = GetNormalizeValue(health, maxHealth);
 
         if (_launchedControlHealthBar != null)
         {

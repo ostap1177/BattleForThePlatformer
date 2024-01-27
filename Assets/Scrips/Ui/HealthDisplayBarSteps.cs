@@ -1,24 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
-public class HealthDisplayBarSteps : MonoBehaviour
+public class HealthDisplayBarSteps : Bar
 {
     [SerializeField] private HealthCounter _playerHealth;
 
-    private Slider _healthSlider;
-
     private void Awake()
     {
-        _healthSlider = GetComponent<Slider>();
         _healthSlider.value = 1;
     }
 
     private void OnEnable()
-    {
+    { 
         _playerHealth.Changed += OnChanged;
     }
 
@@ -27,8 +19,8 @@ public class HealthDisplayBarSteps : MonoBehaviour
         _playerHealth.Changed -= OnChanged;
     }
 
-    private void OnChanged(float value, float maxValue)
+    private void OnChanged(float health, float maxHealth)
     {
-        _healthSlider.value = value / maxValue;
+        _healthSlider.value = GetNormalizeValue(health, maxHealth);
     }
 }

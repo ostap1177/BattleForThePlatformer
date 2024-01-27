@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//[RequireComponent(typeof(Slider))]
 public class Bar : MonoBehaviour
 {
-    [SerializeField] protected Slider _slider;
+    [SerializeField] protected Slider _healthSlider;
 
-    public void OnValueChanged(float value, float maxValue)
+    private void Awake()
     {
-        _slider.value = value / maxValue;
+        //_healthSlider = GetComponent<Slider>();
+    }
+
+    protected float GetNormalizeValue (float value, float maxValue)
+    {
+       return value / maxValue;
     }
 }
