@@ -1,19 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class Player : HealthCounter
 {
-    [SerializeField] private int _health = 4;
     [SerializeField] private int _attackPower = 2;
 
     private int _coinCounter;
-
-    private void Update()
-    {
-        if (_health <= 0)
-        {
-            Dai();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,21 +34,5 @@ public class Player : MonoBehaviour
     {
         return _attackPower;
     }
-
-    private void TakeDamage(int damage)
-    {   
-        _health -= damage;
-    }
-
-    private void Healing(int heal)
-    {
-        _health += heal;
-    }
-
-    private void Dai()
-    {
-        gameObject.SetActive(false);
-    }
-
 }
 

@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : HealthCounter
 {
-    [SerializeField] private int _health = 5;
+    //[SerializeField] private int _health = 5;
     [SerializeField] private int _attackPower = 1;
 
-    private void Update()
-    {
-        if (_health <= 0)
-        {
-            Dai();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (_health <= 0)
+    //    {
+    //        Dai();
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,13 +26,13 @@ public class Enemy : MonoBehaviour
         return _attackPower;
     }
 
-    private void TakeDamage(int damage)
-    {
-        _health -= damage;
-    }
+    //private void TakeDamage(int damage)
+    //{
+    //    _health -= damage;
+    //}
 
-    private void Dai()
-    {
-        gameObject.SetActive(false);
-    }
+    //private void Dai()
+    //{
+    //    gameObject.SetActive(false);
+    //}
 }
