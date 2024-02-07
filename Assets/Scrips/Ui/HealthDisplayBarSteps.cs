@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class HealthDisplayBarSteps : Bar
 {
-
     private void Awake()
     {
         _healthSlider.value = 1;

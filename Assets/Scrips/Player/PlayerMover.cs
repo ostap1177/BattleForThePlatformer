@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _speedJump;
 
     private Animator _animator;
+    private int _idAnimationMove;
+    private string _nameAnimation = "Move";
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _idAnimationMove = Animator.StringToHash(_nameAnimation);
     }
 
     private void Update()
@@ -24,7 +24,7 @@ public class PlayerMover : MonoBehaviour
     private void Mover()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        _animator.SetBool("Move",moveHorizontal != 0);
+        _animator.SetBool(_idAnimationMove,moveHorizontal != 0);
         transform.Translate(_speed * moveHorizontal * Time.deltaTime, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Space) == true)
