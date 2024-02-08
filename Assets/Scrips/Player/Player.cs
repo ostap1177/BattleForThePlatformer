@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : HealthCounter
+public class Player : MonoBehaviour
 {
     [SerializeField] private int _attackPower = 2;
+    [SerializeField] private HealthCounter _healthCounter;
+
+    public int Attack => _attackPower;
 
     private int _coinCounter;
 
@@ -17,7 +20,7 @@ public class Player : HealthCounter
 
         if (collision.TryGetComponent(out MedicineChest medicineChest) == true)
         {
-            Healing(medicineChest.Healing());
+            _healthCounter.Healing(medicineChest.Healing());
             Destroy(collision.gameObject);
         }
     }
@@ -26,13 +29,8 @@ public class Player : HealthCounter
     {
         if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
         {
-            TakeDamage(enemy.Attack());
+            _healthCounter.TakeDamage(enemy.Attack);
         }
-    }
-
-    public int Attack()
-    {
-        return _attackPower;
     }
 }
 

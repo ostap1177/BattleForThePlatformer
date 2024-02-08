@@ -15,27 +15,24 @@ public class HealthCounter : MonoBehaviour
         Changed?.Invoke(_health,_maxHealth);
     }
 
-    private void Update()
+    public void TakeDamage(int damage)
     {
+        _health = Mathf.Clamp(_health - damage, _minHealth, _maxHealth);
+        Changed?.Invoke(_health, _maxHealth);
+
         if (_health <= _minHealth)
         {
             Die();
         }
     }
 
-    protected void TakeDamage(int damage)
-    {
-        _health = Mathf.Clamp(_health - damage, _minHealth, _maxHealth);
-        Changed?.Invoke(_health, _maxHealth);
-    }
-
-    protected void Healing(int heal)
+    public void Healing(int heal)
     {
         _health = Mathf.Clamp(_health + heal, _minHealth, _maxHealth);
         Changed?.Invoke(_health, _maxHealth);
     }
 
-    protected void Die()
+    private void Die()
     {
         gameObject.SetActive(false);
     }

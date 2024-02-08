@@ -16,10 +16,18 @@ public abstract class Bar : MonoBehaviour
         _playerHealth.Changed -= OnChanged;
     }
 
+    private void Awake()
+    {
+        _healthSlider.value = 1;
+    }
+
     protected float GetNormalizeValue(float value, float maxValue)
     {
         return value / maxValue;
     }
 
-    protected abstract void OnChanged(float health, float maxHealth);
+    protected virtual void OnChanged(float health, float maxHealth)
+    {
+        _healthSlider.value = GetNormalizeValue(health, maxHealth);
+    }
 }
