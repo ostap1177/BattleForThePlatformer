@@ -4,8 +4,12 @@ public class MedicineChest : MonoBehaviour
 {
     [SerializeField] private int _healingPoint;
 
-    public int Healing()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        return _healingPoint;
+        if (collision.TryGetComponent(out HealthCounter healthCounter) == true)
+        {
+            healthCounter.Healing(_healingPoint);
+            Destroy(gameObject);
+        }
     }
 }
