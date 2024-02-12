@@ -15,10 +15,10 @@ public class PlaceCoin : MonoBehaviour
    
     private void Start()
     {
-        _coinCreated = StartCoroutine(Created());
+        _coinCreated = StartCoroutine(CreatedCoin());
     }
 
-    private IEnumerator Created()
+    private IEnumerator CreatedCoin()
     {
         _waitForSeconds = new WaitForSeconds(_timeToCreate);
 

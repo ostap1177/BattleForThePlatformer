@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10814fa231424806b5dc67a1685fa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
+  _health: 7
   _minHealth: 0
 --- !u!4 &840956109 stripped
 Transform:
@@ -375,6 +375,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1485166451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 622183666563882344, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
+  m_PrefabInstance: {fileID: 622183667616075488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40925e9012184f77ad235e8df4026cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &622183667616075488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -382,6 +393,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 547852513, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1485166451}
+    - target: {fileID: 547852513, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
+      propertyPath: _vampirismTime
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 622183666563882338, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
       propertyPath: m_Name
       value: PlayerDuck
@@ -429,6 +448,10 @@ PrefabInstance:
     - target: {fileID: 622183666563882341, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 622183666563882344, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
+      propertyPath: _key
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 2250229568710894143, guid: a013be5e7f37a4b6987737bf76541550, type: 3}
       propertyPath: m_AnchorMax.x
