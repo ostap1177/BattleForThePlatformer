@@ -1,33 +1,79 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class AbilityVampirism : MonoBehaviour
 {
     [SerializeField] private int _vampirismPower;
-    [SerializeField] private CircleCollider2D _collider;
+    [SerializeField] private int _vampirismTime;
     [SerializeField] private HealthCounter _health;
-    [SerializeField] private KeyCode _key;
- 
+    [SerializeField] private Player _player;
+
+    private Enemy _enemy;
+
+    private int _seconds = 1;
+    private WaitForSeconds _waitForSeconds;
+    private Coroutine _vampirismTimer;
+
     private void Awake()
     {
-        _collider.isTrigger = true;
+        transform.GetComponent<CircleCollider2D>().isTrigger = true;
+        _waitForSeconds = new WaitForSeconds(_seconds);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnEnable()
     {
-        if (collision.TryGetComponent(out Enemy enemy) == true && Input.GetKeyDown(_key))
+        _player.VampirismActivating += OnVampirismActivating;
+    }
+
+    private void OnDisable()
+    {
+        _player.VampirismActivating -= OnVampirismActivating;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Enemy enemy) == true)
         {
-            Vampirism(enemy);
+            _enemy = enemy;
         }
     }
 
-    private void Vampirism(Enemy enemy)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (enemy.gameObject.TryGetComponent(out HealthCounter healthCounter) == true)
+        if (collision.TryGetComponent(out Enemy enemy) == true)
         {
-            healthCounter.TakeDamage(_vampirismPower);
-            _health.Healing(_vampirismPower);
+            _enemy = null;
+        }
+    }
+
+    private void OnVampirismActivating()
+    {
+        Vampirism();
+    }
+
+    private void Vampirism()
+    {
+        if(_vampirismTimer != null)
+        {
+            StopCoroutine(_vampirismTimer);
+        }
+
+        _vampirismTimer = StartCoroutine(VampirismTimer());
+    }
+
+    private IEnumerator VampirismTimer()
+    {
+        for(int i=0; i<_vampirismTime; i++)
+        {
+            if (_enemy != null && _enemy.gameObject.TryGetComponent(out HealthCounter healthCounter) == true)
+            {
+                healthCounter.TakeDamage(_vampirismPower);
+                _health.Healing(_vampirismPower);
+                Debug.Log(name);
+            }
+
+            yield return _waitForSeconds;
         }
     }
 }

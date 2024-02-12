@@ -1,13 +1,8 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
-    [SerializeField] private int _attackPower = 1;
-    [SerializeField] private HealthCounter _healthCounter;
-
-    public int Attack => _attackPower;
-
-    private void OnollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Player player) == true)
         {

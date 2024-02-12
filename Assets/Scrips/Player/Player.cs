@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
-    [SerializeField] private int _attackPower = 2;
-    [SerializeField] private HealthCounter _healthCounter;
+    [SerializeField] private KeyCode _key;
 
-    public int Attack => _attackPower;
+    public event UnityAction VampirismActivating;
 
     private int _coinCounter;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(_key) == true)
+        {
+            VampirismActivating?.Invoke();
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
