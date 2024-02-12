@@ -1,60 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class AbilityVampirism : MonoBehaviour
 {
     [SerializeField] private int _vampirismPower;
     [SerializeField] private int _vampirismTime;
-    [SerializeField] private HealthCounter _health;
+    [SerializeField] private int _vampirismDistance;
+    [SerializeField] private string _layreMaskToVampirism;
     [SerializeField] private Player _player;
 
-    private Enemy _enemy;
-
-    private int _seconds = 1;
+    private Health _health;
+    private int _secondsWait = 1;
     private WaitForSeconds _waitForSeconds;
     private Coroutine _vampirismTimer;
 
     private void Awake()
     {
-        transform.GetComponent<CircleCollider2D>().isTrigger = true;
-        _waitForSeconds = new WaitForSeconds(_seconds);
+        _waitForSeconds = new WaitForSeconds(_secondsWait);
+        _health = _player.GetComponent<Health>();
     }
 
     private void OnEnable()
     {
-        _player.VampirismActivating += OnVampirismActivating;
+        _player.AbilityEnabled += OnAbilityEnabled;
     }
 
     private void OnDisable()
     {
-        _player.VampirismActivating -= OnVampirismActivating;
+        _player.AbilityEnabled -= OnAbilityEnabled;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnAbilityEnabled()
     {
-        if (collision.TryGetComponent(out Enemy enemy) == true)
-        {
-            _enemy = enemy;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Enemy enemy) == true)
-        {
-            _enemy = null;
-        }
-    }
-
-    private void OnVampirismActivating()
-    {
-        Vampirism();
-    }
-
-    private void Vampirism()
-    {
-        if(_vampirismTimer != null)
+        if (_vampirismTimer != null)
         {
             StopCoroutine(_vampirismTimer);
         }
@@ -64,13 +42,17 @@ public class AbilityVampirism : MonoBehaviour
 
     private IEnumerator VampirismTimer()
     {
-        for(int i=0; i<_vampirismTime; i++)
+        RaycastHit2D[] raycastHits = Physics2D.CircleCastAll(transform.position,_vampirismDistance, Vector3.up,0,LayerMask.GetMask(_layreMaskToVampirism));
+
+        for (int i = 0; i < _vampirismTime; i++)
         {
-            if (_enemy != null && _enemy.gameObject.TryGetComponent(out HealthCounter healthCounter) == true)
+            foreach (var enemy in raycastHits)
             {
-                healthCounter.TakeDamage(_vampirismPower);
-                _health.Healing(_vampirismPower);
-                Debug.Log(name);
+                if (enemy.transform.TryGetComponent(out Enemy enemyToAttack) == true && enemyToAttack.TryGetComponent(out Health healthEnemy)==true)
+                {
+                    healthEnemy.TakeDamage(_vampirismPower);
+                    _health.Healing(_vampirismPower);
+                }
             }
 
             yield return _waitForSeconds;

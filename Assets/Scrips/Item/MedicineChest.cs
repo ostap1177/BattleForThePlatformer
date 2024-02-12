@@ -6,7 +6,7 @@ public class MedicineChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out HealthCounter healthCounter) == true)
+        if (collision.TryGetComponent(out Health healthCounter) == true)
         {
             healthCounter.Healing(_healingPoint);
             Destroy(gameObject);

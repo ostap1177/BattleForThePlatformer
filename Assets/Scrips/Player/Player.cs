@@ -5,7 +5,7 @@ public class Player : Unit
 {
     [SerializeField] private KeyCode _key;
 
-    public event UnityAction VampirismActivating;
+    public event UnityAction AbilityEnabled;
 
     private int _coinCounter;
 
@@ -13,7 +13,7 @@ public class Player : Unit
     {
         if (Input.GetKeyDown(_key) == true)
         {
-            VampirismActivating?.Invoke();
+            AbilityEnabled?.Invoke();
         }
     }
 

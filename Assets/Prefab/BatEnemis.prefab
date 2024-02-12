@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 1311219373}
   - component: {fileID: 1311219371}
   - component: {fileID: 1311219372}
-  m_Layer: 0
+  - component: {fileID: 749283629}
+  m_Layer: 6
   m_Name: BatEnemis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,9 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5759a78bc004051b3beabd2d65e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
-  _minHealth: 0
-  _maxHealth: 5
   _attackPower: 3
 --- !u!114 &1311219372
 MonoBehaviour:
@@ -174,6 +172,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scaningCollider2D: {fileID: 1311219373}
+--- !u!114 &749283629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7380973295210927377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10814fa231424806b5dc67a1685fa43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthValue: 10
+  _minHealth: 0
 --- !u!1001 &3524104124345084527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 3626571144496591864}
-  _playerHealth: {fileID: 1311219371}
+  _playerHealth: {fileID: 749283629}
   _stepHealth: 0.1
   _delay: 1

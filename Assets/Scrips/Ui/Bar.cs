@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class Bar : MonoBehaviour
 {
     [SerializeField] protected Slider _healthSlider;
-    [SerializeField] private HealthCounter _playerHealth;
+    [SerializeField] private Health _playerHealth;
 
     private void OnEnable()
     {
