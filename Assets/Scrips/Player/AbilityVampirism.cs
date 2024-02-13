@@ -37,10 +37,10 @@ public class AbilityVampirism : MonoBehaviour
             StopCoroutine(_vampirismTimer);
         }
 
-        _vampirismTimer = StartCoroutine(VampirismTimer());
+        _vampirismTimer = StartCoroutine(VampirismActive());
     }
 
-    private IEnumerator VampirismTimer()
+    private IEnumerator VampirismActive()
     {
         RaycastHit2D[] raycastHits = Physics2D.CircleCastAll(transform.position,_vampirismDistance, Vector3.up,0,LayerMask.GetMask(_layreMaskToVampirism));
 
@@ -48,7 +48,7 @@ public class AbilityVampirism : MonoBehaviour
         {
             foreach (var enemy in raycastHits)
             {
-                if (enemy.transform.TryGetComponent(out Enemy enemyToAttack) == true && enemyToAttack.TryGetComponent(out Health healthEnemy)==true)
+                if (enemy.transform.TryGetComponent(out Health healthEnemy) == true)
                 {
                     healthEnemy.TakeDamage(_vampirismPower);
                     _health.Healing(_vampirismPower);
